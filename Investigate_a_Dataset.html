@@ -14668,7 +14668,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <li>The <code>cast</code> and <code>production_companies</code> column contain multiple values seperated by a pipe(|) character, so we will have solve this problem without compromising the integrity of the data.</li>
 </ol>
 <h4 id="Missing-values">Missing values<a class="anchor-link" href="#Missing-values">&#182;</a></h4><ol>
-<li><code>imdb</code> column has <code>10</code> null values</li>
+<li><code>imdb_id</code> column has <code>10</code> null values</li>
 <li><code>cast</code> column has <code>76</code> null values</li>
 <li><code>homepage</code> column has <code>7930</code> null values</li>
 <li><code>director</code> column has <code>44</code> null values</li>
@@ -16800,7 +16800,8 @@ class="
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">quantiles</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Helper function to create quantiles for me to use in the pandas cut method</span>
+<span class="k">def</span> <span class="nf">quantiles</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()[</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
     <span class="n">col</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">bin_edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="n">col</span><span class="p">]]</span>
@@ -17380,7 +17381,8 @@ class="
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bar</span><span class="p">(</span><span class="n">df_high_revenue_genre_plot</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Bar plot showing genres that generated revenue in descending order of revenue made</span>
+<span class="n">bar</span><span class="p">(</span><span class="n">df_high_revenue_genre_plot</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Genres That Generated High Revenue&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Genres&#39;</span><span class="p">);</span>
@@ -17738,50 +17740,6 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>Index([&#39;popularity&#39;, &#39;budget&#39;, &#39;revenue&#39;, &#39;original_title&#39;, &#39;cast&#39;, &#39;director&#39;,
-       &#39;runtime&#39;, &#39;genres&#39;, &#39;production_companies&#39;, &#39;release_date&#39;,
-       &#39;vote_average&#39;, &#39;release_year&#39;, &#39;revenue_quantile&#39;],
-      dtype=&#39;object&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[49]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
@@ -18102,47 +18060,6 @@ class="
 3      Vincent D&#39;Onofrio
 4          Nick Robinson
 Name: cast, dtype: object</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[53]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">df_actors</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[53]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>52644</pre>
 </div>
 
 </div>
